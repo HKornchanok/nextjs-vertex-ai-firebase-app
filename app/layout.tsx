@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { ThemeProvider } from "next-themes";
+import Header from "./components/Header";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -23,28 +25,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen text-foreground`}
       >
-        <div className="flex flex-col md:flex-row min-h-screen">
-          {/* First section - 2/3 width on desktop, full width on mobile */}
-          <div className="w-full md:w-2/3 flex flex-col">
-            {/* First subsection - 2/3 height */}
-            <div className="h-2/3 md:h-2/3 bg-blue-100">
-              {children}
-            </div>
-            {/* Second subsection - 1/3 height */}
-            <div className="h-1/3 md:h-1/3 bg-green-100">
-              {/* Content for second subsection */}
-            </div>
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
+        <div className="flex flex-col min-h-screen">
+            <Header />
+                  {children}
+                
           </div>
-          
-          {/* Second section - 1/3 width on desktop, full width on mobile */}
-          <div className="w-full md:w-1/3 bg-purple-100">
-            {/* Content for second section */}
-          </div>
-        </div>
+        </ThemeProvider>
       </body>
     </html>
   );
