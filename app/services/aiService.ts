@@ -200,21 +200,55 @@ class AiService {
         this.tokenUsage.totalTokens += result.response.usageMetadata.totalTokenCount || 0;
       }
 
-      // Extract products from the function call
-      const args = result.response.candidates?.[0]?.content?.parts?.[0]?.functionCall?.args as {
+      let extractedData: {
         extractedProducts?: Array<{ name: string; price: number }>;
         vat?: number;
         serviceCharge?: number;
         totalAmount?: number;
       };
-      const products = args?.extractedProducts || [];
+
+      // Check if we got a function call response
+      const functionCall = result.response.candidates?.[0]?.content?.parts?.[0]?.functionCall;
+      if (functionCall) {
+        extractedData = functionCall.args;
+      } else {
+        // Try to parse JSON from text response
+        const textResponse = result.response.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!textResponse) {
+          throw new Error('No valid response from AI');
+        }
+
+        try {
+          // Extract JSON from markdown code block if present
+          const jsonMatch = textResponse.match(/```json\n([\s\S]*?)\n```/) || textResponse.match(/```\n([\s\S]*?)\n```/);
+          const jsonStr = jsonMatch ? jsonMatch[1] : textResponse;
+          const parsedData = JSON.parse(jsonStr);
+          
+          // Convert the object format to array format if needed
+          if (parsedData.extractedProducts && !Array.isArray(parsedData.extractedProducts)) {
+            extractedData = {
+              ...parsedData,
+              extractedProducts: Object.entries(parsedData.extractedProducts).map(([name, price]) => ({
+                name,
+                price: Number(price)
+              }))
+            };
+          } else {
+            extractedData = parsedData;
+          }
+        } catch (error) {
+          console.error('Failed to parse AI response:', error);
+          throw new Error('Failed to parse AI response');
+        }
+      }
+
+      const products = extractedData?.extractedProducts || [];
       const priceWithoutTax = products.reduce((sum, product) => sum + product.price, 0);
-      const vat = args?.vat || 0;
-      const serviceCharge = args?.serviceCharge || 0;
-      const totalAmount = args?.totalAmount || 0;
+      const vat = extractedData?.vat || 0;
+      const serviceCharge = extractedData?.serviceCharge || 0;
+      const totalAmount = extractedData?.totalAmount || 0;
 
       const vatRate = Math.round((vat / totalAmount) * 100);
-
       const serviceChargeRate = Math.round((serviceCharge / priceWithoutTax) * 100);
       return {
         products,

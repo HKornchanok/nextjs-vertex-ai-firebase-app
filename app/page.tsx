@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import LeftSection from './components/LeftSection';
 import RightSection from './components/RightSection';
-
+import Footer from './components/Footer';
 interface Product {
   name: string;
   price: number;
@@ -31,22 +31,25 @@ export default function Home() {
   };
 
   return (
-    <div className="p-4 h-full">
-      <div className="flex flex-col md:flex-row gap-4 h-[90vh]">
-        <LeftSection
-          onProductsExtracted={setProducts}
-          onPeopleUpdated={setPeople}
-          onReceiptDetailsExtracted={handleReceiptDetailsExtracted}
-        />
-        <RightSection
-          products={products}
-          people={people}
-          vatRate={vatRate}
-          serviceChargeRate={serviceChargeRate}
-          totalAmount={totalAmount}
-          onProductsChange={setProducts}
-        />
+    <div className="h-full flex flex-col">
+      <div className="flex-1 p-4">
+        <div className="flex flex-col md:flex-row gap-4">
+          <LeftSection
+            onProductsExtracted={setProducts}
+            onPeopleUpdated={setPeople}
+            onReceiptDetailsExtracted={handleReceiptDetailsExtracted}
+          />
+          <RightSection
+            products={products}
+            people={people}
+            vatRate={vatRate}
+            serviceChargeRate={serviceChargeRate}
+            totalAmount={totalAmount}
+            onProductsChange={setProducts}
+          />
+        </div>
       </div>
+      <Footer />
     </div>
   );
 }
