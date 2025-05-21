@@ -7,7 +7,7 @@ export default function Footer() {
         <p>
           Built by{' '}
           <Link
-            href="https://kornchanokiednusorn.com"
+            href="https://www.kornchanok.dev"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium underline underline-offset-4 hover:text-primary"
@@ -16,7 +16,7 @@ export default function Footer() {
           </Link>
           {' • '}
           <Link
-            href="https://github.com/kornchanokiednusorn/harn-gun-app"
+            href="https://github.com/HKornchanok/nextjs-vertex-ai-firebase-app"
             target="_blank"
             rel="noopener noreferrer"
             className="font-medium underline underline-offset-4 hover:text-primary"
