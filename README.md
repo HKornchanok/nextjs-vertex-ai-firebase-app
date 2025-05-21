@@ -75,8 +75,8 @@ Make sure to:
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/yourusername/harn-gun-app.git
-cd harn-gun-app
+git clone https://github.com/HKornchanok/nextjs-vertex-ai-firebase-app.git
+cd nextjs-vertex-ai-firebase-app
 ```
 
 2. Install dependencies:
@@ -112,7 +112,7 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 ## Project Structure
 
 ```
-harn-gun-app/
+nextjs-vertex-ai-firebase-app/
 ├── app/                 # Next.js app directory
 ├── components/         # React components
 ├── lib/               # Utility functions and configurations
