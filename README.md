@@ -1,13 +1,12 @@
 # Harn Gun App
 
-A modern web application built with Next.js, Firebase, Vertex AI, Tailwind CSS, and shadcn/ui.
+A modern web application built with Next.js, Firebase, Vertex AI, and Tailwind CSS.
 
 ## Tech Stack
 
 - **Framework**: Next.js 15.3.2
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
-- **UI Components**: shadcn/ui
 - **Backend**: Firebase
 - **AI Integration**: Google Vertex AI
 - **Development**: Turbopack
@@ -15,27 +14,28 @@ A modern web application built with Next.js, Firebase, Vertex AI, Tailwind CSS, 
 ## Prerequisites
 
 - Node.js (Latest LTS version recommended)
-- npm or yarn
+- Bun (Latest version recommended)
 - Firebase account
 - Google Cloud Platform account (for Vertex AI)
 
 ## Getting Started
 
 1. Clone the repository:
+
 ```bash
 git clone https://github.com/yourusername/harn-gun-app.git
 cd harn-gun-app
 ```
 
 2. Install dependencies:
+
 ```bash
-npm install
-# or
-yarn install
+bun install
 ```
 
 3. Set up environment variables:
-Create a `.env.local` file in the root directory with the following variables:
+   Create a `.env.local` file in the root directory with the following variables:
+
 ```env
 NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain
@@ -49,10 +49,9 @@ GOOGLE_APPLICATION_CREDENTIALS=path_to_your_credentials.json
 ```
 
 4. Run the development server:
+
 ```bash
-npm run dev
-# or
-yarn dev
+bun dev
 ```
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
@@ -71,7 +70,7 @@ harn-gun-app/
 
 ## Features
 
-- Modern UI with Tailwind CSS and shadcn/ui components
+- Modern UI with Tailwind CSS
 - Google Vertex AI integration
 - TypeScript support
 - ESLint configuration
@@ -79,10 +78,10 @@ harn-gun-app/
 
 ## Available Scripts
 
-- `npm run dev` - Start development server with Turbopack
-- `npm run build` - Build the application for production
-- `npm run start` - Start the production server
-- `npm run lint` - Run ESLint
+- `bun dev` - Start development server with Turbopack
+- `bun run build` - Build the application for production
+- `bun run start` - Start the production server
+- `bun run lint` - Run ESLint
 
 ## Contributing
 
@@ -102,7 +101,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 - [Firebase](https://firebase.google.com/)
 - [Google Vertex AI](https://cloud.google.com/vertex-ai)
 - [Tailwind CSS](https://tailwindcss.com/)
-- [shadcn/ui](https://ui.shadcn.com/)
 
 ## Learn More
 
