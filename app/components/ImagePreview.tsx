@@ -15,7 +15,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
   onImageRemove,
 }) => {
   return (
-    <div className="card-section h-full">
+    <div className="card-section h-full md:h-[90vh]">
               <h2 className="text-xl font-semibold mb-4 text-foreground">Products and People</h2>
               <div className="flex flex-col items-center justify-center h-full space-y-4">
         {!imagePreview ? (

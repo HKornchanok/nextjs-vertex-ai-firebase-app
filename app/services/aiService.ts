@@ -64,17 +64,9 @@ class AiService {
                       required: ['name', 'price'],
                     },
                   },
-                  vat: {
-                    type: SchemaType.NUMBER,
-                    description: 'VAT amount if present',
-                  },
-                  serviceCharge: {
-                    type: SchemaType.NUMBER,
-                    description: 'Service charge amount if present',
-                  },
                   totalAmount: {
                     type: SchemaType.NUMBER,
-                    description: 'Total amount including VAT and service charge',
+                    description: 'Total amount of the receipt',
                   },
                 },
               },
@@ -202,8 +194,6 @@ class AiService {
 
       let extractedData: {
         extractedProducts?: Array<{ name: string; price: number }>;
-        vat?: number;
-        serviceCharge?: number;
         totalAmount?: number;
       };
 
@@ -243,17 +233,10 @@ class AiService {
       }
 
       const products = extractedData?.extractedProducts || [];
-      const priceWithoutTax = products.reduce((sum, product) => sum + product.price, 0);
-      const vat = extractedData?.vat || 0;
-      const serviceCharge = extractedData?.serviceCharge || 0;
-      const totalAmount = extractedData?.totalAmount || 0;
+      const totalAmount = extractedData?.totalAmount || products.reduce((sum, product) => sum + product.price, 0);
 
-      const vatRate = Math.round((vat / totalAmount) * 100);
-      const serviceChargeRate = Math.round((serviceCharge / priceWithoutTax) * 100);
       return {
         products,
-        vatRate,
-        serviceChargeRate,
         totalAmount,
       };
     } catch (error) {

@@ -24,7 +24,7 @@ const PeopleManagementSection: React.FC<PeopleManagementSectionProps> = ({
   onKeyDown,
 }) => {
   return (
-    <div className="card-section  h-full md:h-[40%]">
+    <div className="card-section  h-full md:h-[29vh]">
       <h2 className="text-xl font-semibold mb-4 text-foreground">Add People</h2>
       <div className="flex flex-col sm:flex-row gap-2 mb-4">
         <input

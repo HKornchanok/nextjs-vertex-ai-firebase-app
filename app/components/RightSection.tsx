@@ -14,8 +14,6 @@ interface Person {
 interface RightSectionProps {
   products?: Product[];
   people?: Person[];
-  vatRate?: number;
-  serviceChargeRate?: number;
   totalAmount?: number;
   onProductsChange?: (products: Product[]) => void;
 }
@@ -23,8 +21,6 @@ interface RightSectionProps {
 const RightSection: React.FC<RightSectionProps> = ({
   products = [],
   people = [],
-  vatRate = 0,
-  serviceChargeRate = 0,
   totalAmount = 0,
   onProductsChange,
 }) => {
@@ -78,17 +74,8 @@ const RightSection: React.FC<RightSectionProps> = ({
       });
     }
 
-    // Calculate VAT and service charge for each person
-    Object.keys(totals).forEach(personName => {
-      const subtotal = totals[personName];
-      const serviceChargeAmount = (subtotal * serviceChargeRate) / 100;
-      const vatAmount = ((subtotal + serviceChargeAmount) * vatRate) / 100;
-
-      totals[personName] = subtotal + vatAmount + serviceChargeAmount;
-    });
-
     return totals;
-  }, [products, people, checkboxStates, vatRate, serviceChargeRate]);
+  }, [products, people, checkboxStates]);
 
   // Calculate total amount for all people
   const calculatedTotal = useMemo(() => {
@@ -97,9 +84,8 @@ const RightSection: React.FC<RightSectionProps> = ({
 
   return (
     <div className="w-full md:w-2/3 rounded-lg flex flex-col h-full gap-4">
-      <div className="h-[60%]">
-        <div className="card-section h-full overflow-y-auto">
-          <div className="flex flex-col gap-4 overflow-y-auto">
+        <div className="card-section h-full md:h-[55vh] overflow-y-auto">
+          <div className="flex flex-col gap-4">
             <div className="flex justify-between items-center">
               <h2 className="text-xl font-semibold mb-4 text-foreground">Products and People</h2>
               <div className="flex flex-col items-end gap-1">
@@ -122,15 +108,12 @@ const RightSection: React.FC<RightSectionProps> = ({
               onAddProduct={handleAddProduct}
             />
           </div>
-        </div>
       </div>
 
       <div className="h-[40%]">
         <PaymentSummary
           people={people}
           personTotals={personTotals}
-          vatRate={vatRate}
-          serviceChargeRate={serviceChargeRate}
         />
       </div>
     </div>

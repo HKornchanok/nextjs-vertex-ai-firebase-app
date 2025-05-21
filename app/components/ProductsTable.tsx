@@ -94,15 +94,15 @@ const ProductsTable: React.FC<ProductsTableProps> = ({
   }
 
   return (
-    <div className="h-full flex flex-col overflow-y-auto">
+    <div className="h-full flex flex-col">
       <div className="flex-1">
         <table className="w-full">
           <thead className="bg-muted/50">
-            <tr>
-              <th className="px-2 sm:px-4 py-2 text-left text-sm font-medium text-muted-foreground">
+            <tr> 
+              <th className="px-2 sm:px-4 py-2 text-left text-sm font-medium text-muted-foreground w-[100px] sm:w-[5px]">
                 Name
               </th>
-              <th className="px-2 sm:px-4 py-2 text-right text-sm font-medium text-muted-foreground">
+              <th className="px-2 sm:px-4 py-2 text-right text-sm font-medium text-muted-foreground w-[100px] sm:w-[5px]">
                 Price
               </th>
               <th className="hidden sm:table-cell px-2 sm:px-4 py-2 text-center text-sm font-medium text-muted-foreground">

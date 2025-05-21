@@ -19,8 +19,6 @@ interface LeftSectionProps {
   onProductsExtracted: (products: Product[]) => void;
   onPeopleUpdated: (people: Person[]) => void;
   onReceiptDetailsExtracted: (details: {
-    vatRate: number;
-    serviceChargeRate: number;
     totalAmount: number;
   }) => void;
 }
@@ -54,8 +52,6 @@ const LeftSection: React.FC<LeftSectionProps> = ({
           const response = await aiService.processReceiptImage(base64String);
           onProductsExtracted(response.products || []);
           onReceiptDetailsExtracted({
-            vatRate: response.vatRate || 0,
-            serviceChargeRate: response.serviceChargeRate || 0,
             totalAmount: response.totalAmount || 0,
           });
           setIsProcessed(true);

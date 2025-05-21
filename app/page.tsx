@@ -16,22 +16,16 @@ interface Person {
 export default function Home() {
   const [products, setProducts] = useState<Product[]>([]);
   const [people, setPeople] = useState<Person[]>([]);
-  const [vatRate, setVatRate] = useState(0);
-  const [serviceChargeRate, setServiceChargeRate] = useState(0);
   const [totalAmount, setTotalAmount] = useState(0);
 
   const handleReceiptDetailsExtracted = (details: {
-    vatRate: number;
-    serviceChargeRate: number;
     totalAmount: number;
   }) => {
-    setVatRate(details.vatRate);
-    setServiceChargeRate(details.serviceChargeRate);
     setTotalAmount(details.totalAmount);
   };
 
   return (
-    <div className="h-full flex flex-col">
+    <div className="h-full flex flex-col min-h-[94vh]">
       <div className="flex-1 p-4">
         <div className="flex flex-col md:flex-row gap-4">
           <LeftSection
@@ -42,8 +36,6 @@ export default function Home() {
           <RightSection
             products={products}
             people={people}
-            vatRate={vatRate}
-            serviceChargeRate={serviceChargeRate}
             totalAmount={totalAmount}
             onProductsChange={setProducts}
           />

@@ -16,7 +16,7 @@ const ReceiptImageSection: React.FC<ReceiptImageSectionProps> = ({
   onImageRemove,
 }) => {
   return (
-    <div className="card-section h-full">
+    <div className={`card-section ${isProcessing ? 'h-[90vh]' : 'h-[60vh]'}`}>
       <div className="flex justify-between items-center mb-2">
         <h2 className="text-xl font-semibold text-foreground">Receipt Image</h2>
         <button
