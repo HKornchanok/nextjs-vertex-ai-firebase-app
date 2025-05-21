@@ -1,6 +1,58 @@
-# Harn Gun App
+# Receipt Scanner App
 
-A modern web application built with Next.js, Firebase, Vertex AI, and Tailwind CSS.
+This application uses Firebase and Vertex AI to process and extract information from receipt images.
+
+## Environment Setup
+
+1. Copy the environment variables template:
+```bash
+cp env.example .env.local
+```
+
+2. Fill in your Firebase configuration values in `.env.local`:
+```
+NEXT_PUBLIC_FIREBASE_API_KEY=your_api_key_here
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_auth_domain_here
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id_here
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket_here
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id_here
+NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id_here
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id_here
+```
+
+## AI Service Features
+
+The application includes an AI service that processes receipt images with the following capabilities:
+
+- Image straightening and preprocessing
+- Product extraction from receipts
+- Automatic calculation of:
+  - Individual product prices
+  - VAT rate
+  - Service charge rate
+  - Total amount
+
+### How it works
+
+1. The service takes a base64-encoded receipt image
+2. Preprocesses the image to straighten it
+3. Uses Vertex AI (Gemini 2.0 Flash model) to extract:
+   - Product names and prices
+   - VAT amount
+   - Service charge
+   - Total amount
+4. Returns structured data including:
+   - List of products with names and prices
+   - Calculated VAT rate
+   - Calculated service charge rate
+   - Total amount
+
+## Security Note
+
+Make sure to:
+- Never commit your `.env.local` file
+- Keep your Firebase credentials secure
+- Add `.env.local` to your `.gitignore` file
 
 ## Tech Stack
 
@@ -43,6 +95,7 @@ NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
 NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_storage_bucket
 NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
 NEXT_PUBLIC_FIREBASE_APP_ID=your_app_id
+NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID=your_measurement_id
 
 GOOGLE_CLOUD_PROJECT=your_project_id
 GOOGLE_APPLICATION_CREDENTIALS=path_to_your_credentials.json

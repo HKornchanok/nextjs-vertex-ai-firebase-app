@@ -211,7 +211,6 @@ class AiService {
       const priceWithoutTax = products.reduce((sum, product) => sum + product.price, 0);
       const vat = args?.vat || 0;
       const serviceCharge = args?.serviceCharge || 0;
-      console.log(vat, serviceCharge);
       const totalAmount = args?.totalAmount || 0;
 
       const vatRate = Math.round((vat / totalAmount) * 100);

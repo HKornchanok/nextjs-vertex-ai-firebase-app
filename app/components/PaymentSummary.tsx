@@ -18,7 +18,6 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   serviceChargeRate,
 }) => {
   const [roundUp, setRoundUp] = useState(false);
-  console.log(vatRate, serviceChargeRate);
   const roundAmount = (amount: number) => {
     if (!roundUp) return amount;
     return Math.ceil(amount);
