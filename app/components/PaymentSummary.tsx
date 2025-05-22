@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 interface Person {
   name: string;
@@ -7,11 +7,13 @@ interface Person {
 interface PaymentSummaryProps {
   people: Person[];
   personTotals: Record<string, number>;
+  onTotalChange?: (total: number) => void;
 }
 
 const PaymentSummary: React.FC<PaymentSummaryProps> = ({
   people,
   personTotals,
+  onTotalChange,
 }) => {
   const [roundUp, setRoundUp] = useState(false);
   const [serviceCharge, setServiceCharge] = useState(0);
@@ -36,8 +38,17 @@ const PaymentSummary: React.FC<PaymentSummaryProps> = ({
     setShowVatSheet(false);
   };
 
+  // Calculate total for all people and notify parent component
+  useEffect(() => {
+    const total = people.reduce((sum, person) => {
+      const baseAmount = personTotals[person.name];
+      return sum + calculateTotalWithCharges(baseAmount);
+    }, 0);
+    onTotalChange?.(total);
+  }, [people, personTotals, serviceCharge, vat, vatOption, roundUp, onTotalChange]);
+
   return (
-    <div className="card-section h-full md:h-[34vh] overflow-y-auto">
+    <div className="card-section col-span-2 h-full md:h-[34vh] overflow-y-auto">
       <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center mb-4">
         <h2 className="text-xl font-semibold text-foreground mb-4 sm:mb-0">Payment Summary</h2>
         <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">

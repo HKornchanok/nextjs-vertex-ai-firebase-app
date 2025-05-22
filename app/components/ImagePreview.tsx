@@ -16,7 +16,7 @@ const ImagePreview: React.FC<ImagePreviewProps> = ({
 }) => {
   return (
     <div className="card-section h-full md:h-[90vh]">
-              <h2 className="text-xl font-semibold mb-4 text-foreground">Products and People</h2>
+              <h2 className="text-xl font-semibold mb-4 text-foreground">Upload Receipt Image</h2>
               <div className="flex flex-col items-center justify-center h-full space-y-4">
         {!imagePreview ? (
           <div className="w-full max-w-md">
